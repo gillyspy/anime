@@ -1150,6 +1150,8 @@ function anime(params = {}) {
   instance.remove = function(targets) {
     const targetsArray = parseTargets(targets);
     removeTargetsFromInstance(targetsArray, instance);
+    if(!targetsArray.length)
+      reject('targets empty');
   }
 
   instance.reset();
