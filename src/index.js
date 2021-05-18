@@ -901,10 +901,15 @@ function anime(params = {}) {
 
   let startTime = 0, lastTime = 0, now = 0;
   let children, childrenLength = 0;
-  let resolve = null;
+  let resolve = null, reject = null;
 
   function makePromise(instance) {
-    const promise = window.Promise && new Promise(_resolve => resolve = _resolve);
+    const promise = window.Promise &&
+    new Promise( _resolve =>{
+      resolve = _resolve
+    }, _reject =>{
+      reject = _reject
+    });
     instance.finished = promise;
     return promise;
   }
@@ -1061,7 +1066,7 @@ function anime(params = {}) {
           setCallback('loopComplete');
           setCallback('complete');
           if (!instance.passThrough && 'Promise' in window) {
-            resolve();
+            resolve(instance);
             promise = makePromise(instance);
           }
         }
