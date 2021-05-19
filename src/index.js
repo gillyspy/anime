@@ -1184,6 +1184,8 @@ function removeTargetsFromActiveInstances(targets) {
     const instance = activeInstances[i];
     removeTargetsFromInstance(targetsArray, instance);
   }
+  if(!instance.add && !targetsArray.length)
+    resolve(instance);
 }
 
 // Stagger helpers
